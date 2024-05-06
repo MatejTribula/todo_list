@@ -20,8 +20,9 @@ after finishing the console version we will start manipulating the dom
 
 1. instances of Project class are all the classes we create
     -properties: type
-    - methods: delete project, create todo
+    - methods  show project todos, delete project
 2. instances of ToDo class are all the todos
-    -propeties: name, project, date created
-    -methods: delete todo
+    -propeties: name, project, date created, isComplete
+    -methods: delete todo, mark todo as complete
 3. all the todo objects will be inside of an todoArr and to see them we will access specific method
+
