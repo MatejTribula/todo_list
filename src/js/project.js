@@ -1,13 +1,13 @@
-import Todo from "./todo.js"
+// import Todo from "./todo.js"
 
 export default class Project {
     constructor(type) {
         this.type = type
     }
 
-    createTodo(title) {
-        return new Todo(title, this.type)
-    }
+    // createTodo(title) {
+    //     return new Todo(title, this.type)
+    // }
 
     showTodos(arr) {
         arr.forEach(todo => {
@@ -15,9 +15,5 @@ export default class Project {
                 console.log(todo)
             }
         });
-    }
-
-    deleteProject() {
-        delete this
     }
 }

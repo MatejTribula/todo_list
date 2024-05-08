@@ -116,7 +116,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.css */ \"./src/main.css\");\n/* harmony import */ var _js_todo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/todo.js */ \"./src/js/todo.js\");\n/* harmony import */ var _js_project_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/project.js */ \"./src/js/project.js\");\n\r\n\r\n\r\n\r\nconst todoArr = []\r\n\r\n\r\n\r\nconst defaultProject = new _js_project_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]('default')\r\n// const dnesProject = new Project('dnes')\r\n\r\n// const popratTodo = defaultProject.createTodo(\"zdeno\")\r\n// todoArr.push(defaultProject.createTodo(\"poprat\"))\r\n// todoArr.push(new Todo('ucit sa', 'dnes'))\r\ntodoArr.push(defaultProject.createTodo(\"zdeno\"))\r\n\r\n\r\n// console.log(todoArr)\r\nconsole.log(todoArr)\r\n// defaultProject.showToDos(todoArr)\r\ndnesProject.showTodos(todoArr)\r\n\r\ntodoArr[0].deleteTodo()\r\nconsole.log(todoArr)\n\n//# sourceURL=webpack://todo_list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.css */ \"./src/main.css\");\n/* harmony import */ var _js_project_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/project.js */ \"./src/js/project.js\");\n/* harmony import */ var _js_controller_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/controller.js */ \"./src/js/controller.js\");\n\r\n// import Todo from \"./js/todo.js\"\r\n\r\n\r\n\r\n\r\n// const defaultProject = new Project('default')\r\n// const dnesProject = new Project('dnes')\r\n\r\n\r\n// const lacoCall = controller.createTodo('joj', 'default')\r\n// controller.addTodo(lacoCall)\r\n\r\n\r\n// console.log(controller.todos)\r\n// console.log(controller.getTodos())\r\n\r\n// controller.saveTodos()\r\n// console.log(controller.getTodos())\r\n\n\n//# sourceURL=webpack://todo_list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/controller.js":
+/*!******************************!*\
+  !*** ./src/js/controller.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo.js */ \"./src/js/todo.js\");\n\r\n\r\nclass Controller {\r\n\r\n    constructor() {\r\n        this.todos = this.getTodos() || []\r\n    }\r\n\r\n    createTodo(title, project) {\r\n        return new _todo_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](title, project)\r\n    }\r\n\r\n    addTodo(todo) {\r\n        this.todos.push(todo)\r\n    }\r\n\r\n\r\n    saveTodos() {\r\n        localStorage.setItem('todos', JSON.stringify(this.todos));\r\n    }\r\n\r\n    getTodos() {\r\n        return JSON.parse(localStorage.getItem('todos'))\r\n    }\r\n}\r\n\r\n\r\nconst controller = new Controller()\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (controller);\n\n//# sourceURL=webpack://todo_list/./src/js/controller.js?");
 
 /***/ }),
 
@@ -126,7 +136,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mai
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Project)\n/* harmony export */ });\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo.js */ \"./src/js/todo.js\");\n\r\n\r\nclass Project {\r\n    constructor(type) {\r\n        this.type = type\r\n    }\r\n\r\n    createTodo(title) {\r\n        return new _todo_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](title, this.type)\r\n    }\r\n\r\n    showTodos(arr) {\r\n        arr.forEach(todo => {\r\n            if (todo.project === this.type) {\r\n                console.log(todo)\r\n            }\r\n        });\r\n    }\r\n\r\n    deleteProject() {\r\n        delete this\r\n    }\r\n}\n\n//# sourceURL=webpack://todo_list/./src/js/project.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Project)\n/* harmony export */ });\n// import Todo from \"./todo.js\"\r\n\r\nclass Project {\r\n    constructor(type) {\r\n        this.type = type\r\n    }\r\n\r\n    // createTodo(title) {\r\n    //     return new Todo(title, this.type)\r\n    // }\r\n\r\n    showTodos(arr) {\r\n        arr.forEach(todo => {\r\n            if (todo.project === this.type) {\r\n                console.log(todo)\r\n            }\r\n        });\r\n    }\r\n}\n\n//# sourceURL=webpack://todo_list/./src/js/project.js?");
 
 /***/ }),
 
@@ -136,7 +146,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\r\n    constructor(title, project) {\r\n        this.title = title\r\n        this.project = project\r\n        this.dateCreated = new Date().getDate()\r\n        this.isComplete = false\r\n    }\r\n\r\n    completeTodo() {\r\n        this.isComplete = true\r\n    }\r\n\r\n    deleteTodo() {\r\n        delete this\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack://todo_list/./src/js/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\r\n    constructor(title, project) {\r\n        this.title = title\r\n        this.project = project\r\n        this.dateCreated = new Date().getDate()\r\n        this.isComplete = false\r\n    }\r\n\r\n    completeTodo() {\r\n        this.isComplete = true\r\n    }\r\n\r\n}\n\n//# sourceURL=webpack://todo_list/./src/js/todo.js?");
 
 /***/ })
 

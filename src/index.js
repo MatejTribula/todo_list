@@ -1,24 +1,19 @@
 import "./main.css"
-import Todo from "./js/todo.js"
+// import Todo from "./js/todo.js"
 import Project from "./js/project.js"
-
-const todoArr = []
-
+import controller from "./js/controller.js"
 
 
-const defaultProject = new Project('default')
+// const defaultProject = new Project('default')
 // const dnesProject = new Project('dnes')
 
-// const popratTodo = defaultProject.createTodo("zdeno")
-// todoArr.push(defaultProject.createTodo("poprat"))
-// todoArr.push(new Todo('ucit sa', 'dnes'))
-todoArr.push(defaultProject.createTodo("zdeno"))
+
+// const lacoCall = controller.createTodo('joj', 'default')
+// controller.addTodo(lacoCall)
 
 
-// console.log(todoArr)
-console.log(todoArr)
-// defaultProject.showToDos(todoArr)
-dnesProject.showTodos(todoArr)
+// console.log(controller.todos)
+// console.log(controller.getTodos())
 
-todoArr[0].deleteTodo()
-console.log(todoArr)
+// controller.saveTodos()
+// console.log(controller.getTodos())

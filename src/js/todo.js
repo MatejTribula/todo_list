@@ -10,7 +10,4 @@ export default class Todo {
         this.isComplete = true
     }
 
-    deleteTodo() {
-        delete this
-    }
 }

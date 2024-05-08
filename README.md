@@ -9,20 +9,17 @@ logic: creation, compltetion status update, deleting of todo, changing all he pr
 
 
 
-1. all the todos will be stored in an array this array will be inside of the only instance of ToDos IIFE (todos will be objects created from a class ToDo)
-2. we will be able to create instances of class Project that will be working as a folder for another todos
-    - in this project we will be able to create instances of todos and they will automatically have assigned project property
-3. method that removes todo
-4. method that changes state of the todo
-
-after finishing the console version we will start manipulating the dom
-
+APP LOGIC
 
 1. instances of Project class are all the classes we create
     -properties: type
-    - methods  show project todos, delete project
+    - methods  show project todos
 2. instances of ToDo class are all the todos
     -propeties: name, project, date created, isComplete
-    -methods: delete todo, mark todo as complete
-3. all the todo objects will be inside of an todoArr and to see them we will access specific method
+    -methods: mark todo as complete
+3. there will be Controller object that will create all the todos and also store them
+
+
+
+
 
