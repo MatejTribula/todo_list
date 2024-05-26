@@ -9,5 +9,4 @@ export default class Todo {
     completeTodo() {
         this.isComplete = true
     }
-
 }

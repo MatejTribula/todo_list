@@ -1,3 +1,15 @@
-h1 {
-    color: aqua;
+:root {
+    --clr-black: #262626;
+    --clr-white: #f1f1f1;
+
+    --border-small: 3px;
+    --border-regular: 5px;
+
+
 }
+
+* {
+    box-sizing: border-box;
+}
+
+body {}

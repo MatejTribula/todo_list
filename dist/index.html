@@ -5,10 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo list</title>
-<script defer src="bundle.js"></script></head>
+
+    <script src="https://kit.fontawesome.com/11ce3943d3.js" crossorigin="anonymous"></script>
+    <script defer src="bundle.js"></script>
+</head>
 
 <body>
-    <h1>ZDENO</h1>
+    <section id="projectContainer" class="item-container project-container">
+        <div class="container-head">
+            <h2>Projects</h2>
+            <button id="createProjectBtn" class="btn btn-regular"><i class="fa-solid fa-plus"></i>Create new
+                Project</button>
+        </div>
+        <ul class="item-container project-container">
+            <li class="item project current">All Todos
+            <li>
+            <li class="item project">Excercise</li>
+        </ul>
+    </section>
+    <section id="todoContainer" class="item-container todo-container">
+        <div class="container-head">
+            <h2>All Todos</h2>
+            <button id="createTodoBtn" class="btn btn-regular"><i class="fa-solid fa-plus"></i>Create new
+                Todo</button>
+        </div>
+        <ul class="item-container todo-container">
+            <li class="item todo"><input type="checkbox"> study</li>
+            <li class="item todo"><input type="checkbox"> read a book</li>
+        </ul>
+
+        <button id="deleteProjectBtn" class="btn btn-warning"><i class="fa-solid fa-trash"></i>Delete Project</button>
+    </section>
+
+
+    <div class="popup-container">
+        <div class="container-head">
+            <h3>New Todo</h3>
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+
+        <form id="todoForm">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" placeholder="Type here...">
+
+            <button type="submit" id="submitTodoBtn" class="btn btn-regular"><i class="fa-solid fa-plus"></i>Create new
+                Todo</button>
+        </form>
+    </div>
 </body>
 
 </html>

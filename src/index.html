@@ -5,10 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo list</title>
+
+    <script src="https://kit.fontawesome.com/11ce3943d3.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <h1>ZDENO</h1>
+    <section id="projectContainer" class="item-container project-container">
+        <div class="section-head">
+            <h2>Projects</h2>
+            <button id="createProjectBtn" class="btn btn-regular"><i class="fa-solid fa-plus"></i>Create new
+                Project</button>
+        </div>
+        <div class="item-container project-container">
+            <div class="item project current">
+                <p>All Todos</p>
+            </div>
+            <div class="item project current">
+                <p>All Todos</p>
+            </div>
+        </div>
+    </section>
+    <section id="todoContainer" class="item-container todo-container">
+        <div class="section-head">
+            <h2>All Todos</h2>
+            <button id="createTodoBtn" class="btn btn-regular"><i class="fa-solid fa-plus"></i>Create new
+                Todo</button>
+        </div>
+
+        <div class="item-container todo-container">
+            <div class="item todo current">
+                <input type="checkbox" name="" id=""><label for=""></label>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

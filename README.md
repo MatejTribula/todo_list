@@ -19,6 +19,12 @@ APP LOGIC
     -methods: mark todo as complete
 3. there will be Controller object that will create all the todos and also store them
 
+DOM
+-there will be DOM controller which will be creating all the needed stuff
+1. display of all projects
+2. display of all todos in project container
+3. methods: show different projects, complete todos, remove todos
+
 
 
 
