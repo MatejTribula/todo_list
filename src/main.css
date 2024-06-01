@@ -1,15 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
     --clr-black: #262626;
     --clr-white: #f1f1f1;
+    --clr-grey: #cccccc;
+    --clr-warning: #ff4343;
+    --clr-primary: #7371FC;
+
+    --clr-black-hover: rgba(38, 38, 38, 0.8);
+    --clr-grey-hover: rgba(204, 204, 204, 0.4);
+    --clr-warning-hover: rgba(255, 67, 67, 0.85);
+
+
 
     --border-small: 3px;
     --border-regular: 5px;
 
+    --small-padding: 2rem 1rem;
+    --regular-padding: 2rem;
 
+    --regular-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+
+    --font-weight-regular: 500;
+    --font-weight-semibold: 600;
 }
 
+/* GENERAL */
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
 }
 
-body {}
+body {
+    background-color: var(--clr-white);
+
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    font-weight: var(--font-weight-regular);
+    font-style: normal;
+
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+
+    grid-template-columns: 30% auto 1fr;
+    grid-template-rows: 1fr;
+
+    overflow: hidden;
+}
+
+
+/* TEXT */
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.item {
+    font-size: 1.25rem;
+    padding: 0 1rem;
+}
+
+.item label {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-regular);
+}
+
+.item,
+.item label,
+button {
+    cursor: pointer;
+}
+
+.project.current {
+    font-weight: var(--font-weight-semibold);
+}
+
+
+/* LAYOUT */
+.line {
+    width: 3px;
+    height: 95%;
+    background-color: var(--clr-grey);
+    align-self: center;
+    border-radius: var(--border-regular);
+}
+
+body>section {
+    padding: var(--small-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+body>section.todo-container {
+    position: relative;
+}
+
+.section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body>section .section-head {
+    padding: 0 1rem;
+}
+
+.item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* COMPONENTS */
+/* btns */
+.btn {
+    background-color: none;
+    border: none;
+    padding: 10px 1rem;
+    font-weight: bold;
+    border-radius: var(--border-small);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+}
+
+.btn-regular {
+    background-color: var(--clr-black);
+    color: var(--clr-white);
+}
+
+.btn-warning {
+    background-color: var(--clr-warning);
+    color: var(--clr-white);
+}
+
+.btn-clean {
+    background-color: none;
+    border: none;
+    font-size: 1.5rem;
+}
+
+#deleteProjectBtn {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+}
+
+
+
+/* popup containers */
+.popup-container {
+    min-width: 25vw;
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+
+    background-color: var(--clr-white);
+    padding: var(--regular-padding);
+    border-radius: var(--border-regular);
+    box-shadow: var(--regular-shadow);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+
+/* form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+input[type=text] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid var(--clr-black);
+
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+}
+
+input[type=text]:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+}
+
+
+
+/* HOVER */
+.btn-regular:hover {
+    background-color: var(--clr-black-hover);
+}
+
+.btn-warning:hover {
+    background-color: var(--clr-warning-hover);
+}
+
+.btn-clean:hover {
+    color: var(--clr-black-hover);
+}
+
+.item:hover {
+    /* font-weight: var(--font-weight-semibold); */
+    background-color: var(--clr-grey-hover);
+    border-radius: var(--border-regular);
+}
+
+
+/* ACTIVE */
+
+.btn:active {
+    scale: 0.98;
+}
