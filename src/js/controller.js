@@ -2,12 +2,18 @@ import Todo from "./todo.js"
 import Project from "./project.js"
 
 const defaultProject = new Project('default')
+defaultProject.current = true
 
 class Controller {
 
     constructor() {
         this.todos = this.getTodos() || []
-        this.projects = this.getProjects() || [defaultProject]
+        this.projects = this.getProjects()
+
+        if (this.projects.length === 0) {
+            this.projects.push(defaultProject)
+            this.saveProjects()
+        }
     }
 
     createTodo(title, project) {
@@ -45,6 +51,7 @@ class Controller {
     getProjects() {
         return JSON.parse(localStorage.getItem('projects')) || []
     }
+
 }
 
 

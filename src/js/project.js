@@ -1,6 +1,7 @@
 export default class Project {
     constructor(type) {
         this.type = type
+        this.current = false
     }
 
     showTodos(arr) {
