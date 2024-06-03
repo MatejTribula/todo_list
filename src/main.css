@@ -97,14 +97,15 @@ button {
 }
 
 body>section {
-    padding: var(--small-padding);
+    padding: var(--regular-padding);
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
 body>section.todo-container {
-    position: relative;
+    /* position: relative; */
+    overflow: scroll;
 }
 
 .section-head {
@@ -113,8 +114,10 @@ body>section.todo-container {
     justify-content: space-between;
 }
 
-body>section .section-head {
-    padding: 0 1rem;
+.todo-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .item {
@@ -123,11 +126,28 @@ body>section .section-head {
     align-items: center;
 }
 
-input[type='checkbox'] {
+
+
+.todo-items .item {
+    justify-content: space-between;
+}
+
+.todo-items .item i {
+    color: transparent;
+}
+
+.item .label-input {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+input[type='radio'] {
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
+
 
 /* COMPONENTS */
 /* btns */
@@ -156,7 +176,7 @@ input[type='checkbox'] {
 }
 
 .btn-clean {
-    background-color: none;
+    background-color: transparent;
     border: none;
     font-size: 1.5rem;
 }
@@ -164,7 +184,7 @@ input[type='checkbox'] {
 #deleteProjectBtn {
     position: absolute;
     bottom: 2rem;
-    left: 2rem;
+    right: 2rem;
 }
 
 
@@ -196,7 +216,7 @@ form {
     gap: 2rem;
 }
 
-.label-input {
+form .label-input {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -228,6 +248,7 @@ input[type=text]:focus {
 }
 
 .btn-clean:hover {
+    background-color: none;
     color: var(--clr-black-hover);
 }
 
@@ -237,9 +258,17 @@ input[type=text]:focus {
     border-radius: var(--border-regular);
 }
 
+.todo-items .item:hover i {
+    color: var(--clr-black);
+}
+
 
 /* ACTIVE */
 
-.btn:active {
+button:active {
     scale: 0.98;
+}
+
+.btn-clean:active {
+    scale: 0.90;
 }
