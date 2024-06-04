@@ -118,12 +118,12 @@ class DomController {
 
     }
 
-    createProject(e, type) {
-        e.preveneDefault()
-        controller.createProject(type)
-        controller.addProject()
-        location.reload()
-    }
+    // createProject(e, type) {
+    //     e.preveneDefault()
+    //     controller.createProject(type)
+    //     controller.addProject()
+    //     location.reload()
+    // }
 
     changeCurrentClass() {
         const projects = controller.getProjects()
