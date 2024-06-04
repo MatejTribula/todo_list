@@ -1,3 +1,5 @@
+import controller from "./controller.js"
+
 class DomController {
 
     showProjects(projectArr, container) {
@@ -60,7 +62,7 @@ class DomController {
         }
     }
 
-    projectCreationPopup() {
+    iteamCreationPopup(popupType, labelInputAttribute) {
         const popupDiv = document.createElement('div')
         popupDiv.classList.add('popup-container')
 
@@ -68,22 +70,110 @@ class DomController {
         sectionHead.classList.add('section-head')
 
         const title = document.createElement('h3')
+        title.innerText = `New ${popupType}`
+
+        const closeBtn = document.createElement('button')
+        closeBtn.classList.add('btn-clean', 'btn-close')
+
+        const closeIcon = document.createElement('i')
+        closeIcon.classList.add('fa-solid', 'fa-xmark')
+
+        const form = document.createElement('form')
+        form.setAttribute('method', 'POST')
+
+        const labelInput = document.createElement('div')
+        labelInput.classList.add('label-input')
+
+        const label = document.createElement('label')
+        label.setAttribute('for', labelInputAttribute)
+        label.innerText = 'Title'
+
+        const input = document.createElement('input')
+        input.setAttribute('type', 'text')
+        input.setAttribute('id', labelInputAttribute)
+        input.setAttribute('placeholder', 'Type here...')
+
+
+        const submitBtn = document.createElement('button')
+        submitBtn.setAttribute('type', 'submit')
+        submitBtn.classList.add('btn', 'btn-regular')
+        submitBtn.innerText = `Create New ${popupType}`
+
+        const plusIcon = document.createElement('i')
+        plusIcon.classList.add('fa-solid', 'fa-plus')
+        submitBtn.prepend(plusIcon)
+
+        document.body.appendChild(popupDiv)
+
+        popupDiv.appendChild(sectionHead)
+
+        sectionHead.appendChild(title)
+        sectionHead.appendChild(closeBtn)
+        closeBtn.appendChild(closeIcon)
+        popupDiv.appendChild(form)
+        form.appendChild(labelInput)
+        labelInput.appendChild(label)
+        labelInput.appendChild(input)
+        form.appendChild(submitBtn)
+
     }
-    createProject() { }
 
-    changeCurrentProject() { }
+    createProject(e, type) {
+        e.preveneDefault()
+        controller.createProject(type)
+        controller.addProject()
+        location.reload()
+    }
 
-    removeProject() { }
+    changeCurrentClass() {
+        const projects = controller.getProjects()
+        const currentProject = projects.find(project => project.current === true)
+        const currentProjectTitle = currentProject.type
 
-    todoCreationPopup() { }
-    createTodo() { }
+        const currentDomProject = document.querySelector('.current')
+        currentDomProject.classList.remove('current')
 
-    completeTodo() { }
+        const nextDomProject = document.querySelector(`.project:contains(${currentProjectTitle})`)
+        nextDomProject.classList.add('current')
+    }
 
-    removeTodo() { }
+    changeCurrentListener() {
+        const projects = document.querySelectorAll('.project')
+        projects.forEach(project => {
+            project.addEventListener('click', () => {
+                console.log(project.innerText)
+                // controller.changeCurrent(project.innerText)
+                this.changeCurrentClass()
+            })
+        })
+    }
+
+    // projectDeleteBtn(container) {
+    //     const currentProject = controller.getProjects().find(project => project.current === true)
+    //     if (currentProject) {
+    //         const btn = document.createElement('button')
+    //         btn.classList.add('btn', 'btn-warning')
+    //         btn.innerText = 'Delete Project'
+
+    //         const trashIcon = document.createElement('i')
+    //         trashIcon.classList.add('fa-solid', 'fa-xmark')
+
+    //         btn.prepend(trashIcon)
+
+    //         container.appendChild(btn)
+    //     }
+    // }
+
+    // createTodo() { }
+
+    // completeTodo() { }
+
+    // closePopup() { }
+
 }
 
 
 
 const domController = new DomController()
+
 export default domController
