@@ -117,11 +117,12 @@ class Controller {
     changeCurrent(newCurrentName) {
 
         const currentProject = this.projects.find(project => project.current === true)
-        currentProject.current = false
-
         const newCurrentProject = this.projects.find(project => project.type === newCurrentName)
 
-        newCurrentProject.current = true
+        if (currentProject !== newCurrentProject) {
+            currentProject.current = false
+            newCurrentProject.current = true
+        }
     }
 
 }

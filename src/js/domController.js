@@ -25,7 +25,6 @@ class DomController {
         const currentProject = projectArr.find(project => project.current === true)
 
         todoArr.forEach(item => {
-            console.log('chalos')
             if (currentProject.type == 'default') {
                 domCreation(item)
             } else if (item.project === currentProject.type) {
@@ -118,35 +117,50 @@ class DomController {
 
     }
 
-    // createProject(e, type) {
-    //     e.preveneDefault()
-    //     controller.createProject(type)
-    //     controller.addProject()
-    //     location.reload()
+    changeCurrentClass(nextProjectTitle) {
+        controller.changeCurrent(nextProjectTitle)
+
+        // const projects = controller.getProjects()
+        const domProjects = document.querySelectorAll(".project")
+
+        if (nextProjectTitle == "default") {
+            nextProjectTitle = "All Todos"
+        }
+
+        // console.log(nextProjectTitle)
+
+        const oldDomCurrent = document.querySelector('.current')
+        const newDomCurrent = Array.from(domProjects).find(domProject => domProject.textContent.includes(nextProjectTitle))
+
+        if (oldDomCurrent !== newDomCurrent) {
+            oldDomCurrent.classList.remove('current')
+            newDomCurrent.classList.add('current')
+        }
+
+    }
+
+    // changeCurrentListener() {
+
+    //     const projects = document.querySelectorAll('.project')
+
+    //     projects.forEach(project => {
+    //         project.addEventListener('click', () => {
+    //             this.changeCurrentClass()
+    //         })
+
+    //     });
+
+    //     // console.log('ajoj')
+
+    //     // const projects = document.querySelectorAll('.project')
+    //     // projects.forEach(project => {
+    //     //     project.addEventListener('click', () => {
+    //     //         console.log(project.innerText)
+    //     //         controller.changeCurrent(project.innerText)
+    //     //         this.changeCurrentClass()
+    //     //     })
+    //     // })
     // }
-
-    changeCurrentClass() {
-        const projects = controller.getProjects()
-        const currentProject = projects.find(project => project.current === true)
-        const currentProjectTitle = currentProject.type
-
-        const currentDomProject = document.querySelector('.current')
-        currentDomProject.classList.remove('current')
-
-        const nextDomProject = document.querySelector(`.project:contains(${currentProjectTitle})`)
-        nextDomProject.classList.add('current')
-    }
-
-    changeCurrentListener() {
-        const projects = document.querySelectorAll('.project')
-        projects.forEach(project => {
-            project.addEventListener('click', () => {
-                console.log(project.innerText)
-                // controller.changeCurrent(project.innerText)
-                this.changeCurrentClass()
-            })
-        })
-    }
 
     // projectDeleteBtn(container) {
     //     const currentProject = controller.getProjects().find(project => project.current === true)
