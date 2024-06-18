@@ -115,10 +115,14 @@ class Controller {
     }
 
     changeCurrent(newCurrentName) {
-
+        if (newCurrentName = "All Todos") {
+            newCurrentName = 'default'
+        }
+        console.log(newCurrentName)
         const currentProject = this.projects.find(project => project.current === true)
         const newCurrentProject = this.projects.find(project => project.type === newCurrentName)
 
+        console.log(currentProject, newCurrentProject)
         if (currentProject !== newCurrentProject) {
             currentProject.current = false
             newCurrentProject.current = true

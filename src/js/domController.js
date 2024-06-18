@@ -148,11 +148,13 @@ class DomController {
     changeCurrentListener() {
         const domProjects = document.querySelectorAll('.project')
 
-        console.log('test')
-        console.log(domProjects)
+        // console.log('test')
+
         domProjects.forEach(domProject => {
-            console.log('cakam')
-            domProject.addEventListener('click', () => this.changeCurrentClass(domProject.innerText))
+            domProject.addEventListener('click', () => {
+                console.log(domProject.innerText)
+                this.changeCurrentClass(domProject.innerText)
+            })
         });
     }
 
