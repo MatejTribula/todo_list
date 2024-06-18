@@ -1,10 +1,17 @@
 import controller from "./controller.js"
 
 class DomController {
+    constructor() {
+        this.projects = controller.getProjects()
+        this.todos = controller.getTodos()
 
-    showProjects(projectArr, container) {
+        this.domProjects = document.querySelectorAll('.project')
+    }
 
-        projectArr.forEach(item => {
+
+    showProjects(container) {
+
+        this.projects.forEach(item => {
 
             const itemDiv = document.createElement('div')
             itemDiv.classList.add('item', 'project')
@@ -20,11 +27,11 @@ class DomController {
         })
     }
 
-    showTodos(todoArr, container, projectArr) {
+    showTodos(container) {
 
-        const currentProject = projectArr.find(project => project.current === true)
+        const currentProject = this.projects.find(project => project.current === true)
 
-        todoArr.forEach(item => {
+        this.todos.forEach(item => {
             if (currentProject.type == 'default') {
                 domCreation(item)
             } else if (item.project === currentProject.type) {
@@ -136,7 +143,6 @@ class DomController {
             oldDomCurrent.classList.remove('current')
             newDomCurrent.classList.add('current')
         }
-
     }
 
     // changeCurrentListener() {

@@ -27,8 +27,8 @@ const currentProject = document.querySelector('.current')
 
 
 
-domController.showProjects(controller.getProjects(), projectItems, currentProject)
-domController.showTodos(controller.getTodos(), todoItems, controller.getProjects())
+domController.showProjects(projectItems)
+domController.showTodos(todoItems)
 
 // domController.projectDeleteBtn(projectItems)
 // domController.changeCurrentListener()
