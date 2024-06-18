@@ -4,9 +4,9 @@ class DomController {
     constructor() {
         this.projects = controller.getProjects()
         this.todos = controller.getTodos()
-
-        this.domProjects = document.querySelectorAll('.project')
     }
+
+
 
 
     showProjects(container) {
@@ -145,28 +145,17 @@ class DomController {
         }
     }
 
-    // changeCurrentListener() {
+    changeCurrentListener() {
+        const domProjects = document.querySelectorAll('.project')
 
-    //     const projects = document.querySelectorAll('.project')
+        console.log('test')
+        console.log(domProjects)
+        domProjects.forEach(domProject => {
+            console.log('cakam')
+            domProject.addEventListener('click', () => this.changeCurrentClass(domProject.innerText))
+        });
+    }
 
-    //     projects.forEach(project => {
-    //         project.addEventListener('click', () => {
-    //             this.changeCurrentClass()
-    //         })
-
-    //     });
-
-    //     // console.log('ajoj')
-
-    //     // const projects = document.querySelectorAll('.project')
-    //     // projects.forEach(project => {
-    //     //     project.addEventListener('click', () => {
-    //     //         console.log(project.innerText)
-    //     //         controller.changeCurrent(project.innerText)
-    //     //         this.changeCurrentClass()
-    //     //     })
-    //     // })
-    // }
 
     // projectDeleteBtn(container) {
     //     const currentProject = controller.getProjects().find(project => project.current === true)

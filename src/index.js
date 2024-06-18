@@ -33,6 +33,6 @@ domController.showTodos(todoItems)
 // domController.projectDeleteBtn(projectItems)
 // domController.changeCurrentListener()
 
-domController.changeCurrentClass('sport')
+domController.changeCurrentListener()
 
 // domController.iteamCreationPopup('Project', 'projectTitle')
