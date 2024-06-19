@@ -11,24 +11,11 @@ import domController from "./js/domController.js"
 // controller.removeTodo('zdeno')
 
 
-console.log(controller.getProjects())
-// console.log(controller.getTodos())
-// console.log(controller.projects)
-
-const body = document.body
-const projectItems = document.getElementById('projectContainer').querySelector('.project-items')
-const todoItems = document.getElementById('todoContainer').querySelector('.todo-items')
+// console.log(controller.getProjects())
 
 
-const currentProject = document.querySelector('.current')
-
-
-
-
-
-
-domController.showProjects(projectItems)
-domController.showTodos(todoItems)
+domController.showProjects()
+domController.showTodos()
 
 // domController.projectDeleteBtn(projectItems)
 // domController.changeCurrentListener()

@@ -7,8 +7,6 @@ defaultProject.current = true
 
 
 class Controller {
-
-
     constructor() {
         this.todos = this.getTodos() || []
         this.projects = this.getProjects()
@@ -118,11 +116,11 @@ class Controller {
         if (newCurrentName = "All Todos") {
             newCurrentName = 'default'
         }
-        console.log(newCurrentName)
+        // console.log(newCurrentName)
         const currentProject = this.projects.find(project => project.current === true)
         const newCurrentProject = this.projects.find(project => project.type === newCurrentName)
 
-        console.log(currentProject, newCurrentProject)
+        // console.log(currentProject, newCurrentProject)
         if (currentProject !== newCurrentProject) {
             currentProject.current = false
             newCurrentProject.current = true

@@ -4,12 +4,18 @@ class DomController {
     constructor() {
         this.projects = controller.getProjects()
         this.todos = controller.getTodos()
+
+        this.currentProject = this.projects.find(project => project.current === true)
+
+        this.body = document.body
+        this.projectItems = document.getElementById('projectContainer').querySelector('.project-items')
+        this.todoItems = document.getElementById('todoContainer').querySelector('.todo-items')
     }
 
 
 
 
-    showProjects(container) {
+    showProjects() {
 
         this.projects.forEach(item => {
 
@@ -23,18 +29,17 @@ class DomController {
             }
 
             itemDiv.appendChild(itemParagraph)
-            container.appendChild(itemDiv)
+            this.projectItems.appendChild(itemDiv)
         })
+
     }
 
-    showTodos(container) {
-
-        const currentProject = this.projects.find(project => project.current === true)
+    showTodos() {
 
         this.todos.forEach(item => {
-            if (currentProject.type == 'default') {
+            if (this.currentProject.type == 'default') {
                 domCreation(item)
-            } else if (item.project === currentProject.type) {
+            } else if (item.project === this.currentProject.type) {
                 domCreation(item)
             }
         })
@@ -64,8 +69,10 @@ class DomController {
             labelInput.appendChild(itemLabel)
             itemDiv.appendChild(labelInput)
             itemDiv.appendChild(closeBtn)
-            container.appendChild(itemDiv)
+            this.todoItems.appendChild(itemDiv)
         }
+
+        this.projectDeleteBtn()
     }
 
     iteamCreationPopup(popupType, labelInputAttribute) {
@@ -148,32 +155,43 @@ class DomController {
     changeCurrentListener() {
         const domProjects = document.querySelectorAll('.project')
 
-        // console.log('test')
 
         domProjects.forEach(domProject => {
             domProject.addEventListener('click', () => {
-                console.log(domProject.innerText)
+                // console.log(domProject.innerText)
                 this.changeCurrentClass(domProject.innerText)
+                this.showTodos()
             })
-        });
+        })
+
+
     }
 
 
-    // projectDeleteBtn(container) {
-    //     const currentProject = controller.getProjects().find(project => project.current === true)
-    //     if (currentProject) {
-    //         const btn = document.createElement('button')
-    //         btn.classList.add('btn', 'btn-warning')
-    //         btn.innerText = 'Delete Project'
+    projectDeleteBtn() {
+        console.log('deleteBtn test')
+        const oldProjectDeleteBtn = document.getElementById('deleteProjectBtn')
+        if (oldProjectDeleteBtn) { oldProjectDeleteBtn.remove() }
 
-    //         const trashIcon = document.createElement('i')
-    //         trashIcon.classList.add('fa-solid', 'fa-xmark')
 
-    //         btn.prepend(trashIcon)
+        const currentCheck = this.projects.find(project => project.current === true)
+        // if (currentCheck.type != 'default') {
 
-    //         container.appendChild(btn)
-    //     }
-    // }
+        const btn = document.createElement('button')
+        btn.classList.add('btn', 'btn-warning')
+        btn.setAttribute('id', 'deleteProjectBtn')
+        btn.innerText = 'Delete Project'
+
+        const trashIcon = document.createElement('i')
+        trashIcon.classList.add('fa-solid', 'fa-trash')
+
+        btn.prepend(trashIcon)
+
+        btn.addEventListener('click', controller.removeProject())
+
+        this.todoItems.appendChild(btn)
+        // }
+    }
 
     // createTodo() { }
 
