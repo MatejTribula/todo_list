@@ -112,17 +112,20 @@ class Controller {
         return JSON.parse(localStorage.getItem('projects')) || []
     }
 
+    getCurrent() {
+        return this.projects.find(project => project.current === true)
+    }
+
     changeCurrent(newCurrentName) {
-        if (newCurrentName = "All Todos") {
+        if (newCurrentName == "All Todos") {
             newCurrentName = 'default'
         }
         // console.log(newCurrentName)
-        const currentProject = this.projects.find(project => project.current === true)
-        const newCurrentProject = this.projects.find(project => project.type === newCurrentName)
+        const newCurrentProject = this.projects.find(project => project.type == newCurrentName)
 
-        // console.log(currentProject, newCurrentProject)
-        if (currentProject !== newCurrentProject) {
-            currentProject.current = false
+        // console.log(this.getCurrent(), newCurrentProject, 'changecurrent controller')
+        if (this.getCurrent() !== newCurrentProject) {
+            this.getCurrent().current = false
             newCurrentProject.current = true
         }
     }

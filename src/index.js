@@ -22,4 +22,6 @@ domController.showTodos()
 
 domController.changeCurrentListener()
 
+
+// setInterval(() => console.log(controller.getCurrent()), 1000)
 // domController.iteamCreationPopup('Project', 'projectTitle')

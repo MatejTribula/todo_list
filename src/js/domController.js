@@ -158,7 +158,7 @@ class DomController {
 
         domProjects.forEach(domProject => {
             domProject.addEventListener('click', () => {
-                // console.log(domProject.innerText)
+                // console.log(domProject.innerText, 'changecurrent listener')
                 this.changeCurrentClass(domProject.innerText)
                 this.showTodos()
             })
@@ -169,28 +169,31 @@ class DomController {
 
 
     projectDeleteBtn() {
-        console.log('deleteBtn test')
+        // console.log('deleteBtn test')
         const oldProjectDeleteBtn = document.getElementById('deleteProjectBtn')
         if (oldProjectDeleteBtn) { oldProjectDeleteBtn.remove() }
 
 
-        const currentCheck = this.projects.find(project => project.current === true)
-        // if (currentCheck.type != 'default') {
 
-        const btn = document.createElement('button')
-        btn.classList.add('btn', 'btn-warning')
-        btn.setAttribute('id', 'deleteProjectBtn')
-        btn.innerText = 'Delete Project'
+        const currentProject = controller.getCurrent()
+        // console.log(currentProject, 'joj')
 
-        const trashIcon = document.createElement('i')
-        trashIcon.classList.add('fa-solid', 'fa-trash')
+        if (currentProject && currentProject.type !== 'default') {
+            const btn = document.createElement('button')
+            btn.classList.add('btn', 'btn-warning')
+            btn.setAttribute('id', 'deleteProjectBtn')
+            btn.innerText = 'Delete Project'
 
-        btn.prepend(trashIcon)
+            const trashIcon = document.createElement('i')
+            trashIcon.classList.add('fa-solid', 'fa-trash')
 
-        btn.addEventListener('click', controller.removeProject())
+            btn.prepend(trashIcon)
 
-        this.todoItems.appendChild(btn)
-        // }
+            btn.addEventListener('click', controller.removeProject())
+
+            this.todoItems.appendChild(btn)
+
+        }
     }
 
     // createTodo() { }
