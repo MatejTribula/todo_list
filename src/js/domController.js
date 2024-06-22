@@ -10,8 +10,11 @@ class DomController {
         this.body = document.body
         this.projectItems = document.getElementById('projectContainer').querySelector('.project-items')
         this.todoItems = document.getElementById('todoContainer').querySelector('.todo-items')
-    }
 
+        this.todoHeading = document.getElementById('todoContainer').querySelector('.section-head').querySelector('h2')
+        // this.todoHeading.innerText = this.currentProject.type
+
+    }
 
 
 
@@ -141,7 +144,7 @@ class DomController {
             nextProjectTitle = "All Todos"
         }
 
-        // console.log(nextProjectTitle)
+        console.log(nextProjectTitle)
 
         const oldDomCurrent = document.querySelector('.current')
         const newDomCurrent = Array.from(domProjects).find(domProject => domProject.textContent.includes(nextProjectTitle))
@@ -149,6 +152,8 @@ class DomController {
         if (oldDomCurrent !== newDomCurrent) {
             oldDomCurrent.classList.remove('current')
             newDomCurrent.classList.add('current')
+
+            this.todoHeading.innerText = nextProjectTitle
         }
     }
 
@@ -159,7 +164,14 @@ class DomController {
         domProjects.forEach(domProject => {
             domProject.addEventListener('click', () => {
                 // console.log(domProject.innerText, 'changecurrent listener')
-                this.changeCurrentClass(domProject.innerText)
+                // console.log(controller.getProjects())
+                let projectInnerText = domProject.innerText
+
+                if (projectInnerText === "All Todos") {
+                    projectInnerText = 'default'
+                }
+                // console.log(projectInnerText)
+                this.changeCurrentClass(projectInnerText)
                 this.showTodos()
             })
         })

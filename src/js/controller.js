@@ -123,13 +123,14 @@ class Controller {
         // console.log(newCurrentName)
         const newCurrentProject = this.projects.find(project => project.type == newCurrentName)
 
-        // console.log(this.getCurrent(), newCurrentProject, 'changecurrent controller')
+        console.log(this.getCurrent())
         if (this.getCurrent() !== newCurrentProject) {
             this.getCurrent().current = false
             newCurrentProject.current = true
+            // console.log(this.getCurrent(), newCurrentProject)
         }
+        this.saveProjects()
     }
-
 }
 
 

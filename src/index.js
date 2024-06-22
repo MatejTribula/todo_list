@@ -8,11 +8,10 @@ import domController from "./js/domController.js"
 // const zdeno = controller.createProject('sport')
 // controller.addProject(zdeno)
 
-// controller.removeTodo('zdeno')
-
-
 // console.log(controller.getProjects())
+// console.log(controller.getTodos())
 
+// console.log(controller.getTodos())
 
 domController.showProjects()
 domController.showTodos()
@@ -21,7 +20,6 @@ domController.showTodos()
 // domController.changeCurrentListener()
 
 domController.changeCurrentListener()
-
 
 // setInterval(() => console.log(controller.getCurrent()), 1000)
 // domController.iteamCreationPopup('Project', 'projectTitle')
