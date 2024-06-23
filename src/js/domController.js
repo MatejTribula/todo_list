@@ -11,7 +11,7 @@ class DomController {
         this.projectItems = document.getElementById('projectContainer').querySelector('.project-items')
         this.todoItems = document.getElementById('todoContainer').querySelector('.todo-items')
 
-        this.todoHeading = document.getElementById('todoContainer').querySelector('.section-head').querySelector('h2')
+        this.todoContainerHeading = document.getElementById('todoContainer').querySelector('.section-head').querySelector('h2')
         // this.todoHeading.innerText = this.currentProject.type
 
     }
@@ -144,7 +144,7 @@ class DomController {
             nextProjectTitle = "All Todos"
         }
 
-        console.log(nextProjectTitle)
+        // console.log(nextProjectTitle)
 
         const oldDomCurrent = document.querySelector('.current')
         const newDomCurrent = Array.from(domProjects).find(domProject => domProject.textContent.includes(nextProjectTitle))
@@ -153,7 +153,7 @@ class DomController {
             oldDomCurrent.classList.remove('current')
             newDomCurrent.classList.add('current')
 
-            this.todoHeading.innerText = nextProjectTitle
+            this.changeTodoContainerHeading()
         }
     }
 
@@ -180,16 +180,20 @@ class DomController {
     }
 
 
+    changeTodoContainerHeading() {
+        let newProjectTitle = controller.getCurrent().type
+
+        newProjectTitle === 'default' ? newProjectTitle = 'All Todos' : newProjectTitle
+        this.todoContainerHeading.innerText = newProjectTitle
+    }
+
+
     projectDeleteBtn() {
         // console.log('deleteBtn test')
         const oldProjectDeleteBtn = document.getElementById('deleteProjectBtn')
         if (oldProjectDeleteBtn) { oldProjectDeleteBtn.remove() }
 
-
-
         const currentProject = controller.getCurrent()
-        // console.log(currentProject, 'joj')
-
         if (currentProject && currentProject.type !== 'default') {
             const btn = document.createElement('button')
             btn.classList.add('btn', 'btn-warning')
@@ -201,11 +205,18 @@ class DomController {
 
             btn.prepend(trashIcon)
 
-            btn.addEventListener('click', controller.removeProject())
+            btn.addEventListener('click', () => {
+                controller.removeProject(controller.getCurrent().type)
+                this.removeDomProject()
+            })
 
             this.todoItems.appendChild(btn)
-
         }
+    }
+
+    removeDomProject() {
+        const currentDom = document.querySelector('.current')
+        currentDom.remove()
     }
 
     // createTodo() { }
@@ -213,7 +224,6 @@ class DomController {
     // completeTodo() { }
 
     // closePopup() { }
-
 }
 
 

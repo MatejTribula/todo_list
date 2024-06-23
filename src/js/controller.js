@@ -87,14 +87,20 @@ class Controller {
     }
 
     removeProject(projectTitle) {
-        const toRemoveProject = this.projects.find(project => project.title == projectTitle)
-        const toRemoveIndex = this.todos.indexOf(toRemoveProject)
+        const toRemoveProject = this.projects.find(project => project.type == projectTitle)
+        const toRemoveIndex = this.projects.indexOf(toRemoveProject)
+
+        // console.log(toRemoveProject, 'project')
+        // console.log(toRemoveIndex, 'index')
+
 
         if (toRemoveIndex !== -1 && projectTitle != 'default') {
-            this.project.splice(toRemoveIndex, 1)
+            this.projects.splice(toRemoveIndex, 1)
         }
-
+        this.changeCurrent('default')
         this.saveProjects()
+        location.reload()
+        // console.log(this.getProjects())
     }
 
     addProject(project) {
@@ -122,15 +128,21 @@ class Controller {
         }
         // console.log(newCurrentName)
         const newCurrentProject = this.projects.find(project => project.type == newCurrentName)
+        // console.log(newCurrentProject)
 
-        console.log(this.getCurrent())
-        if (this.getCurrent() !== newCurrentProject) {
+
+        if (this.getCurrent() && this.getCurrent() !== newCurrentProject) {
             this.getCurrent().current = false
             newCurrentProject.current = true
             // console.log(this.getCurrent(), newCurrentProject)
         }
+
+        if (!this.getCurrent()) {
+            newCurrentProject.current = true
+        }
         this.saveProjects()
     }
+
 }
 
 
