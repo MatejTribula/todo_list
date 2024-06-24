@@ -12,8 +12,8 @@ class DomController {
         this.todoItems = document.getElementById('todoContainer').querySelector('.todo-items')
 
         this.todoContainerHeading = document.getElementById('todoContainer').querySelector('.section-head').querySelector('h2')
-        // this.todoHeading.innerText = this.currentProject.type
-
+        this.createProjectBtn = document.getElementById('createProjectBtn')
+        this.createTodoBtn = document.getElementById('createTodoBtn')
     }
 
 
@@ -78,7 +78,7 @@ class DomController {
         this.projectDeleteBtn()
     }
 
-    iteamCreationPopup(popupType, labelInputAttribute) {
+    itemCreationPopup(popupType, labelInputAttribute) {
         const popupDiv = document.createElement('div')
         popupDiv.classList.add('popup-container')
 
@@ -131,6 +131,24 @@ class DomController {
         labelInput.appendChild(label)
         labelInput.appendChild(input)
         form.appendChild(submitBtn)
+
+        closeBtn.addEventListener('click', () => popupDiv.remove())
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            const inputValue = input.value
+            if (popupType == 'Project') {
+                console.log(inputValue)
+                const newProject = controller.createProject(inputValue)
+                controller.addProject(newProject)
+            } else {
+                const current = controller.getCurrent()
+                const newTodo = controller.createTodo(inputValue, current.type)
+                controller.addTodo(newTodo)
+            }
+            location.reload()
+        }
+        )
+
 
     }
 
@@ -219,11 +237,14 @@ class DomController {
         currentDom.remove()
     }
 
-    // createTodo() { }
+    createTodo(title) {
+        controller.createTodo(title, this.currentProject)
+        location.reload()
+    }
 
     // completeTodo() { }
 
-    // closePopup() { }
+
 }
 
 
