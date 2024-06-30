@@ -142,10 +142,11 @@ body>section.todo-container {
     align-items: center;
 }
 
-input[type='radio'] {
+input[type='checkbox'] {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    filter: grayscale(1);
 }
 
 
