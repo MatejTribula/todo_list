@@ -286,7 +286,7 @@ class DomController {
                 } else {
                     controller.completeTodo(todoTitle, true)
                 }
-
+                controller.saveTodos()
             })
 
 
