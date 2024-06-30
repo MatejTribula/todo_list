@@ -57,6 +57,18 @@ class Controller {
         }
     }
 
+    completeTodo(todoTitle, bool) {
+        const todo = this.todos.find(t => t.title === todoTitle)
+        if (todo) {
+            if (bool === true) {
+                todo.isComplete = true
+            } else {
+                todo.isComplete = false
+            }
+            this.saveTodos()
+        }
+    }
+
 
     saveTodos() {
         localStorage.setItem('todos', JSON.stringify(this.todos))

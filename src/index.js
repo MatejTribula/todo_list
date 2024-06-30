@@ -1,5 +1,4 @@
 import "./main.css"
-import controller from "./js/controller.js"
 import domController from "./js/domController.js"
 
 // const zdenoo = controller.createTodo('zdeno', 'default')
@@ -24,10 +23,5 @@ domController.changeTodoContainerHeading()
 domController.createProjectBtn.addEventListener('click', () => domController.itemCreationPopup('Project', 'projectTitle'))
 domController.createTodoBtn.addEventListener('click', () => domController.itemCreationPopup('Todo', 'todoTitle'))
 
-// domController.projectDeleteBtn(projectItems)
-// domController.changeCurrentListener()
-
-
-
-// setInterval(() => console.log(controller.getCurrent()), 1000)
-// domController.iteamCreationPopup('Project', 'projectTitle')
+domController.completeTodo()
+domController.removeDomTodoListener()

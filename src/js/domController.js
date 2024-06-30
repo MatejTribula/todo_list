@@ -20,7 +20,7 @@ class DomController {
 
     showProjects() {
 
-        this.projects.forEach(item => {
+        controller.getProjects().forEach(item => {
 
             const itemDiv = document.createElement('div')
             itemDiv.classList.add('item', 'project')
@@ -38,11 +38,15 @@ class DomController {
     }
 
     showTodos() {
+        const todoItemsContainer = this.todoItems
+        const current = controller.getCurrent()
 
-        this.todos.forEach(item => {
-            if (this.currentProject.type == 'default') {
+        todoItemsContainer.innerHTML = ''
+
+        controller.getTodos().forEach(item => {
+            if (current.type == 'default') {
                 domCreation(item)
-            } else if (item.project === this.currentProject.type) {
+            } else if (item.project === current.type) {
                 domCreation(item)
             }
         })
@@ -55,13 +59,20 @@ class DomController {
             labelInput.classList.add('label-input')
 
             const itemInput = document.createElement('input')
-            itemInput.setAttribute("type", "radio")
+            itemInput.setAttribute("type", "checkbox")
+
+            if (item.isComplete) {
+                itemInput.checked = true
+            } else {
+                itemInput.checked = false
+            }
 
             const itemLabel = document.createElement('label')
             itemLabel.innerText = item.title
 
             const closeBtn = document.createElement('button')
             closeBtn.classList.add('btn-clean', 'btn-close')
+
 
             const closeIcon = document.createElement('i')
             closeIcon.classList.add('fa-solid', 'fa-xmark')
@@ -72,84 +83,99 @@ class DomController {
             labelInput.appendChild(itemLabel)
             itemDiv.appendChild(labelInput)
             itemDiv.appendChild(closeBtn)
-            this.todoItems.appendChild(itemDiv)
+            todoItemsContainer.appendChild(itemDiv)
         }
 
         this.projectDeleteBtn()
+        this.removeDomTodoListener()
     }
 
     itemCreationPopup(popupType, labelInputAttribute) {
-        const popupDiv = document.createElement('div')
-        popupDiv.classList.add('popup-container')
+        console.log(popupCounter)
+        if (popupCounter === 0) {
+            const popupDiv = document.createElement('div')
+            popupDiv.classList.add('popup-container')
 
-        const sectionHead = document.createElement('div')
-        sectionHead.classList.add('section-head')
+            const sectionHead = document.createElement('div')
+            sectionHead.classList.add('section-head')
 
-        const title = document.createElement('h3')
-        title.innerText = `New ${popupType}`
+            const title = document.createElement('h3')
+            title.innerText = `New ${popupType}`
 
-        const closeBtn = document.createElement('button')
-        closeBtn.classList.add('btn-clean', 'btn-close')
+            const closeBtn = document.createElement('button')
+            closeBtn.classList.add('btn-clean', 'btn-close')
 
-        const closeIcon = document.createElement('i')
-        closeIcon.classList.add('fa-solid', 'fa-xmark')
+            const closeIcon = document.createElement('i')
+            closeIcon.classList.add('fa-solid', 'fa-xmark')
 
-        const form = document.createElement('form')
-        form.setAttribute('method', 'POST')
+            const form = document.createElement('form')
+            form.setAttribute('method', 'POST')
 
-        const labelInput = document.createElement('div')
-        labelInput.classList.add('label-input')
+            const labelInput = document.createElement('div')
+            labelInput.classList.add('label-input')
 
-        const label = document.createElement('label')
-        label.setAttribute('for', labelInputAttribute)
-        label.innerText = 'Title'
+            const label = document.createElement('label')
+            label.setAttribute('for', labelInputAttribute)
+            label.innerText = 'Title'
 
-        const input = document.createElement('input')
-        input.setAttribute('type', 'text')
-        input.setAttribute('id', labelInputAttribute)
-        input.setAttribute('placeholder', 'Type here...')
+            const input = document.createElement('input')
+            input.setAttribute('type', 'text')
+            input.setAttribute('id', labelInputAttribute)
+            input.setAttribute('placeholder', 'Type here...')
 
 
-        const submitBtn = document.createElement('button')
-        submitBtn.setAttribute('type', 'submit')
-        submitBtn.classList.add('btn', 'btn-regular')
-        submitBtn.innerText = `Create New ${popupType}`
+            const submitBtn = document.createElement('button')
+            submitBtn.setAttribute('type', 'submit')
+            submitBtn.classList.add('btn', 'btn-regular')
+            submitBtn.innerText = `Create New ${popupType}`
 
-        const plusIcon = document.createElement('i')
-        plusIcon.classList.add('fa-solid', 'fa-plus')
-        submitBtn.prepend(plusIcon)
+            const plusIcon = document.createElement('i')
+            plusIcon.classList.add('fa-solid', 'fa-plus')
+            submitBtn.prepend(plusIcon)
 
-        document.body.appendChild(popupDiv)
+            document.body.appendChild(popupDiv)
 
-        popupDiv.appendChild(sectionHead)
+            popupDiv.appendChild(sectionHead)
 
-        sectionHead.appendChild(title)
-        sectionHead.appendChild(closeBtn)
-        closeBtn.appendChild(closeIcon)
-        popupDiv.appendChild(form)
-        form.appendChild(labelInput)
-        labelInput.appendChild(label)
-        labelInput.appendChild(input)
-        form.appendChild(submitBtn)
+            sectionHead.appendChild(title)
+            sectionHead.appendChild(closeBtn)
+            closeBtn.appendChild(closeIcon)
+            popupDiv.appendChild(form)
+            form.appendChild(labelInput)
+            labelInput.appendChild(label)
+            labelInput.appendChild(input)
+            form.appendChild(submitBtn)
 
-        closeBtn.addEventListener('click', () => popupDiv.remove())
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            const inputValue = input.value
-            if (popupType == 'Project') {
-                console.log(inputValue)
-                const newProject = controller.createProject(inputValue)
-                controller.addProject(newProject)
-            } else {
-                const current = controller.getCurrent()
-                const newTodo = controller.createTodo(inputValue, current.type)
-                controller.addTodo(newTodo)
+            closeBtn.addEventListener('click', () => {
+                popupCounter--
+                popupDiv.remove()
+            })
+            submitBtn.addEventListener('click', (e) => {
+                // console.log(popupType)
+                e.preventDefault()
+                const inputValue = input.value
+                if (popupType == 'Project') {
+                    // console.log(inputValue)
+                    const newProject = controller.createProject(inputValue)
+                    controller.addProject(newProject)
+                    this.projectItems.innerHTML = ''
+                    this.showProjects()
+                    this.changeCurrentListener()
+                } else {
+                    const current = controller.getCurrent()
+                    const newTodo = controller.createTodo(inputValue, current.type)
+                    // console.log(newTodo)
+                    controller.addTodo(newTodo)
+                    this.todoItems.innerHTML = ''
+                    this.showTodos()
+                }
+                popupDiv.remove()
+
+                popupCounter = 0
             }
-            location.reload()
+            )
+            popupCounter++
         }
-        )
-
-
     }
 
     changeCurrentClass(nextProjectTitle) {
@@ -191,9 +217,9 @@ class DomController {
                 // console.log(projectInnerText)
                 this.changeCurrentClass(projectInnerText)
                 this.showTodos()
+
             })
         })
-
 
     }
 
@@ -239,10 +265,52 @@ class DomController {
 
     createTodo(title) {
         controller.createTodo(title, this.currentProject)
-        location.reload()
+        this.todoItems.innerHTML = ''
+        this.showTodos()
     }
 
-    // completeTodo() { }
+    completeTodo() {
+        const domTodos = this.todoItems.querySelectorAll('.item')
+
+
+        domTodos.forEach(domTodo => {
+            const label = domTodo.querySelector('label')
+            const todoTitle = label.innerText
+            const input = domTodo.querySelector('input')
+
+
+
+            input.addEventListener('click', () => {
+                if (input.checked === false) {
+                    controller.completeTodo(todoTitle, false)
+                } else {
+                    controller.completeTodo(todoTitle, true)
+                }
+
+            })
+
+
+        });
+
+    }
+    removeDomTodo(label) {
+        controller.removeTodo(label.innerText)
+
+        this.todoItems.innerHTML = ''
+        this.showTodos()
+    }
+
+    removeDomTodoListener() {
+        const domTodos = document.querySelectorAll('.todo')
+
+        domTodos.forEach(todo => {
+            const label = todo.querySelector('label')
+            const btn = todo.querySelector('.btn-close')
+            // console.log(todo, btn)
+            btn.addEventListener('click', () => this.removeDomTodo(label))
+            // btn.addEventListener('click', () => console.log('joj'))
+        })
+    }
 
 
 }
@@ -252,3 +320,5 @@ class DomController {
 const domController = new DomController()
 
 export default domController
+
+let popupCounter = 0
