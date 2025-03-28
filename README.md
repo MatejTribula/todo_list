@@ -1,11 +1,11 @@
-# todo_list
+# todo list
+
+This project was designed in Figma and built using vanilla javascript, HTML and CSS
+
+🔗 [View demo](https://matejtribula.github.io/todo_list/dist/index.html)
 
 
-There will be default screen with all the todos, each todo will be clickable and if so it will be put into completed and removed from the default screen.
-
-each todo will have these properties: title, description, dueDate, priority, project
-
-logic: creation, compltetion status update, deleting of todo, changing all he properties,creation of new projects
+## 
 
 
 
